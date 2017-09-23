@@ -1,0 +1,40 @@
+language:   node_js
+node_js:
+  - 6.0.0
+
+branches:
+  only:
+    - master
+
+build:
+  ci:
+    - shippable_retry npm install
+    - npm test
+#  post_ci:
+#    - command1
+#    - command2
+#  on_success:
+#    - command1
+#    - command2
+#  on_failure:
+#    - command1
+#    - command2
+#  cache: <boolean>
+#  cache_dir_list:
+#    - dir1
+#    - dir2
+#  advancedReporting: <boolean>
+
+# Integrations are used to connect external resources to CI
+# http://docs.shippable.com/integrations/overview/
+integrations:
+
+  # http://docs.shippable.com/ci/shippableyml/#notifications
+  notifications:
+  # turning of email for PR builds, get notified only on failure and change in status
+  # http://docs.shippable.com/integrations/notifications/email/
+    - integrationName: email
+      type: email
+      on_success: change
+      on_failure: always
+      on_pull_request: never
